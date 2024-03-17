@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Streamed Sentence</title>
+</head>
+<body>
+    <h1>Real-time Streamed Sentence</h1>
+    <div id="sentence-container"></div>
+
+    <script>
+        // Function to fetch streamed data and display in the browser
+        function fetchData() {
+            const sentenceContainer = document.getElementById('sentence-container');
+            const stream = new EventSource('/stream-sentence/');
+            stream.onmessage = function(event) {
+                sentenceContainer.innerHTML += event.data + '<br>';
+            };
+        }
+
+        // Call the function to start fetching streamed data
+        window.onload = function() {
+            fetchData();
+        };
+    </script>
+</body>
+</html>
